@@ -20,7 +20,7 @@ from google.appengine.api import urlfetch
 from google.appengine.ext import webapp
 import google.appengine.ext.webapp.util
 
-REMOTE_ROBOT = 'http://demo.phpmywave.org/?'
+REMOTE_ROBOT = 'http://demo.phpmywave.org'
 ATTEMPTS = 3
 
 
