@@ -21,15 +21,12 @@ class phpMyWave_Server
             $request = Zend_Json::decode($rawPost);
         }
         
-        return $request;
+        return (object) $request;
     }
     
     public function handle()
     {
-        $test = $this->getJSONRequest();
         
-        
-        var_dump($test['blips']);
     }
     
     public function setClass($class, $namespace = '', $argv = null)
