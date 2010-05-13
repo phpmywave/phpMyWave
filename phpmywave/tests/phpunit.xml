@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="./testHelper.php" colors="true">
+    <testsuite name="phpMyWave Controller-testing suite">
+        <directory>./controllers/</directory>
+    </testsuite>
+    <testsuite name="phpMyWave Job-testing suite">
+        <directory>./tasks/</directory>
+    </testsuite>
+</phpunit>
