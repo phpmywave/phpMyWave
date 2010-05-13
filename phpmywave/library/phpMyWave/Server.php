@@ -11,9 +11,25 @@ class phpMyWave_Server
         }
     }
     
+    public function getJSONRequest()
+    {
+        $request = array();
+        $rawPost = $GLOBALS['HTTP_RAW_POST_DATA'];
+        
+        if (!empty($rawPost)) {
+            
+            $request = Zend_Json::decode($rawPost);
+        }
+        
+        return $request;
+    }
+    
     public function handle()
     {
-        var_dump($this->_methods);
+        $test = $this->getJSONRequest();
+        
+        
+        var_dump($test['blips']);
     }
     
     public function setClass($class, $namespace = '', $argv = null)
@@ -30,6 +46,7 @@ class phpMyWave_Server
             
             // Get namespace.
             if ($namespace == '') {
+                
                 $namespace = is_object($class) ? get_class($class) : $class;
             }
             

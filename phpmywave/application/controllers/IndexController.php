@@ -37,7 +37,7 @@ class IndexController extends Zend_Controller_Action
     {
         $server = new phpMyWave_Server();
         $server->setClass('Robot');
-       
-        $server->handle();
+        
+        echo $server->handle();
     }
 }
