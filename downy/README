@@ -1,0 +1,84 @@
+Downy
+=====
+
+Project page: http://code.google.com/p/downy/
+Live demo: http://downybot.appspot.com/
+Wave: downybot@appspot.com
+
+Overview
+--------
+
+Downy is a Wave robot for synchronizing a Mercurial repository with a wave.
+It wraps the stock Mercurial server to serve both the contents of the
+repository and the wave robot protocol endpoints.
+
+To test out Downy, add downybot@appspot.com as a wave participant.
+
+Downy has two parts:
+- A python WSGI application speaking the wave robot protocol.
+- An AppEngine proxy which forwards requests to Downy.
+
+The latter is necessary because Wave currently only supports robots
+that run on App Engine.
+
+Disclaimer
+----------
+
+Downy barely works. It can list a working directory, add files to the wave,
+and save them back again to the working directory. It needs features,
+and it needs robustness. Oh, and it needs styled text to be added to
+the Python wave API!
+
+Requirements
+------------
+
+Downy:
+- python 2.5 or newer
+- simplejson
+- webob
+- Mercurial 1.1 or newer. I've been testing on 1.2, but 1.1 might work.
+
+The wave client library is bundled with Downy.
+
+Proxy:
+- App Engine SDK
+
+Usage
+-----
+
+Downy:
+You can run main.py standalone to use Python's built-in wsgi server.
+Downy also works with Mod-WSGI (www.modwsgi.org); see the appendix
+of this document for a sample configuration.
+
+Proxy:
+Edit REMOTE_ROBOT in proxy.py to be the URL of your Downy instance.
+Note that App Engine only fetches from ports 80 and 443. You also have to
+make sure that the server hosting Downy is capable of responding to all
+requests within 10 seconds. This isn't possible for everyone, notably
+DSL customers in underserved areas of Chicago (thanks, AT&T!).
+
+Appendix
+--------
+
+Here's a sample configuration for running Downy under Apache via Mod-WSGI.
+
+This serves all requests from one thread of one process, since Hg does not
+like to have more than one writer to a repository. With some effort,
+one probably could serve the Hg repository separately from the robot
+so that the former does not have to be single-threaded.
+
+Other salient points:
+- Set a user with write permissions on the repository
+- Set python-path appropriately
+- Allow access to stdin. (Mercurial calls isatty on stdin when constructing
+its UI.)
+
+<VirtualHost *>
+	ServerName downy.artdent.homelinux.net
+	WSGIScriptAlias / /home/jacob/downy/main.py
+	WSGIProcessGroup downy
+</VirtualHost>
+
+WSGIDaemonProcess downy threads=1 python-path=/home/jacob/downy user=jacob
+WSGIRestrictStdin Off
