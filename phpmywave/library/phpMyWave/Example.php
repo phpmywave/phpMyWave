@@ -1,4 +1,5 @@
 <?php
+
 class phpMyWave_Example
 {
     public function __construct()
