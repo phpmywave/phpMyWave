@@ -24,7 +24,6 @@ class IndexController extends Zend_Controller_Action
     public function init()
     {
         $this->getFrontController()->setParam('noViewRenderer', true);
-        $this->_helper->layout->disableLayout();
     }
 
     /**
@@ -36,6 +35,9 @@ class IndexController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        new phpMyWave_Example();
+        $server = new phpMyWave_Server();
+        $server->setClass('Robot');
+       
+        $server->handle();
     }
 }
