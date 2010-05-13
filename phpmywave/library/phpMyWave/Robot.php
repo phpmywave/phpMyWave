@@ -2,7 +2,7 @@
 /**
  * Abstract Robot class
  */
-abstract class phpMyWave_Robot implements phpMyWave_EventHandler
+abstract class phpMyWave_Robot
 {
 
     /**
@@ -92,48 +92,48 @@ abstract class phpMyWave_Robot implements phpMyWave_EventHandler
     protected function setupVerificationToken($_verificationToken, $_securityToken) {}
 
     // AnnotatedTextChangedEvent
-    protected function onAnnotatedTextChanged($event) {}
+    protected function onAnnotatedTextChanged($_event) {}
 
     // BlipContributorsChangedEvent
-    protected function onBlipContributorsChanged($event) {}
+    protected function onBlipContributorsChanged($_event) {}
 
     // BlipSubmittedEvent
-    protected function onBlipSubmitted($event) {}
+    protected function onBlipSubmitted($_event) {}
 
     // DocumentChangedEvent
-    protected function onDocumentChanged($event) {}
+    protected function onDocumentChanged($_event) {}
 
     // FormButtonClickedEvent
-    protected function onFormButtonClicked($event) {}
+    protected function onFormButtonClicked($_event) {}
 
     // GadgetStateChangedEvent
-    protected function onGadgetStateChanged($event) {}
+    protected function onGadgetStateChanged($_event) {}
 
     // OperationErrorEvent
-    protected function onOperationError($event) {}
+    protected function onOperationError($_event) {}
 
     // WaveletBlipCreatedEvent
-    protected function onWaveletBlipCreated($event) {}
+    protected function onWaveletBlipCreated($_event) {}
 
     // WaveletBlipRemovedEvent
-    protected function onWaveletBlipRemoved($event) {}
+    protected function onWaveletBlipRemoved($_event) {}
 
     // WaveletCreatedEvent
-    protected function onWaveletCreated($event) {}
+    protected function onWaveletCreated($_event) {}
 
     // WaveletFetchedEvent
-    protected function onWaveletFetched($event) {}
+    protected function onWaveletFetched($_event) {}
 
     // WaveletParticipantsChangedEvent
-    protected function onWaveletParticipantsChanged($event) {}
+    protected function onWaveletParticipantsChanged($_event) {}
 
     // WaveletSelfAddedEvent
-    protected function onWaveletSelfAdded($event) {}
+    protected function onWaveletSelfAdded($_event) {}
 
     // WaveletSelfRemovedEvent
-    protected function onWaveletSelfRemoved($event) {}
+    protected function onWaveletSelfRemoved($_event) {}
 
     // WaveletTitleChangedEvent
-    protected function onWaveletTitleChanged($event)  {}
+    protected function onWaveletTitleChanged($_event)  {}
 
 }
