@@ -5,6 +5,14 @@
 class phpMyWave_Wavelet
 {
 
+    /**
+     * @var array
+     */
+    private $_blips;
+
+    /**
+     * Constructor
+     */
     public function __construct()
     {
 
