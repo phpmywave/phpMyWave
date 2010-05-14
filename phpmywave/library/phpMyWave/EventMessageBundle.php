@@ -4,7 +4,6 @@
  */
 class phpMyWave_EventMessageBundle
 {
-
     /**
      * @var phpMyWave_Wavelet
      */
@@ -13,7 +12,7 @@ class phpMyWave_EventMessageBundle
     /**
      * @var array
      */
-    private $_events;
+    private $_events = array();
 
     /**
      * @var array
@@ -44,9 +43,52 @@ class phpMyWave_EventMessageBundle
      */
     public static function fromJson($_jsonData)
     {
-        $bundle = new phpMyWave_EventMessageBundle();
+        $eventMessageBundle = new phpMyWave_EventMessageBundle();
+        
+        // Collect and add events.
+        if (isset($_jsonData['events']['list']) && is_array($_jsonData['events']['list'])) {
+            
+            $events = array();
+            
+            foreach ($_jsonData['events']['list'] as $eventJSON) {
+                
+                if (isset($eventJSON['type'])) {
+                    
+                    // Default event values.
+                    $eventType       = strtoupper((string) $eventJSON['type']);
+                    
+                    // Validate event type.
+                    $eventType = strtoupper((string) $eventJSON['type']);
+                    
+                    if (!in_array($eventType, phpMyWave_Enum_EventType::values())) {
+                        
+                        throw new Exception('Invalid type "' . $eventType . '" detected');
+                    }
+                    
+                    // Define event properties.
+                    $eventNamespace  = phpMyWave_Enum_EventType::$namespaceMapping[$eventType];
+                    $eventWavelet    = null; //@todo: missing!
+                    $eventBundle     = null; //@todo: missing!
+                    $eventModifiedBy = (isset($eventJSON['modifiedBy']))? (string) $eventJSON['modifiedBy']: '';
+                    $eventTimestamp  = (isset($eventJSON['timestamp']))?  (int)    $eventJSON['timestamp']:  0;
+                    $eventBlipId     = null; //@todo: missing!
+                    
+                    // Create event instance.
+                    $events[] = new $eventNamespace( $eventType
+                                                   , $eventWavelet
+                                                   , $eventBundle
+                                                   , $eventModifiedBy
+                                                   , $eventTimestamp
+                                                   , $eventBlipId
+                                                   );
+                }
+            }
+            
+            $eventMessageBundle->setEvents($events);
+        }
+        
         //TODO Parse JSON data in new object
-        return $bundle;
+        return $eventMessageBundle;
     }
 
     /**
@@ -78,7 +120,9 @@ class phpMyWave_EventMessageBundle
     }
 
     /**
-     *
+     * Returns events stored in the event message bundle.
+     * 
+     * @param array $_events
      */
     public function getEvents()
     {
@@ -166,8 +210,23 @@ class phpMyWave_EventMessageBundle
         $this->_blips = $_blipData;
     }
 
-    public function setEvents($_events)
+    /**
+     * Adds given events to the event message bundle.
+     * 
+     * @param array $_events
+     */
+    public function setEvents(array $_events)
     {
+        // Validate events.
+        foreach ($_events as $event) {
+            
+            if (!$event instanceof phpMyWave_Event_Abstract) {
+                
+                throw new Exception('Invalid class; must be instace of phpMyWave_Event_Abstract');
+            }
+        }
+        
+        // Add to events.
         $this->_events = array_merge($this->_events, $_events);
     }
 
@@ -185,5 +244,4 @@ class phpMyWave_EventMessageBundle
     {
 
     }
-
 }

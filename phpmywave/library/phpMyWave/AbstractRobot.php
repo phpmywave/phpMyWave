@@ -70,13 +70,13 @@ abstract class phpMyWave_AbstractRobot
      * Processes the incoming event bundle
      */
     public function processEvents(phpMyWave_EventMessageBundle $_events) {
-        
+        /*
         $reflection = Zend_Server_Reflection::reflectClass($this);
         
         foreach ($reflection->getMethods() as $method) {
             
             var_dump($method->getName());
-        }
+        }*/
     }
 
     /**

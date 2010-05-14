@@ -44,7 +44,7 @@ abstract class phpMyWave_Event_Abstract
      * @param long $_timestamp
      * @param string $_blipId
      */
-    protected function __construct($_eventType, $_wavelet, $_bundle, $_modifiedBy, $_timestamp, $_blipId)
+    public function __construct($_eventType, $_wavelet, $_bundle, $_modifiedBy, $_timestamp, $_blipId)
     {
     }
 
