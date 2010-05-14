@@ -68,7 +68,7 @@ class phpMyWave_EventMessageBundle
                     // Define event properties.
                     $eventNamespace  = phpMyWave_Enum_EventType::$namespaceMapping[$eventType];
                     $eventWavelet    = null; //@todo: missing!
-                    $eventBundle     = null; //@todo: missing!
+                    $eventBundle     = $eventMessageBundle;
                     $eventModifiedBy = (isset($eventJSON['modifiedBy']))                  ? (string) $eventJSON['modifiedBy']                  : null;
                     $eventTimestamp  = (isset($eventJSON['timestamp']))                   ? (int)    $eventJSON['timestamp']                   : null;
                     $eventBlipId     = (isset($eventJSON['properties']['map']['blipId'])) ? (string) $eventJSON['properties']['map']['blipId'] : null;
