@@ -1,7 +1,7 @@
 <?php
 class phpMyWave_Server
 {
-    protected $_methods = array();
+    protected $_robots = array();
     
     public function __construct($class = null)
     {
@@ -21,12 +21,22 @@ class phpMyWave_Server
             $request = Zend_Json::decode($rawPost);
         }
         
-        return (object) $request;
+        return $request;
     }
     
     public function handle()
     {
+        $eventMessageBundle = phpMyWave_EventMessageBundle::fromJson($this->getJSONRequest());
         
+        foreach ($this->_robots as $robotReflection) {
+            
+            // Initialize robot.
+            $robotNamespace = $robotReflection->getName();
+            $robotInstance  = new $robotNamespace;
+            
+            // Process events.
+            $robotInstance->processEvents($eventMessageBundle);
+        }
     }
     
     public function setClass($class, $namespace = '', $argv = null)
@@ -47,8 +57,14 @@ class phpMyWave_Server
                 $namespace = is_object($class) ? get_class($class) : $class;
             }
             
+            // Validate namespace.
+            if (!new $namespace instanceof phpMyWave_AbstractRobot) {
+                
+                throw new Exception('Invalid method or class; must be instace of phpMyWave_AbstractRobot');
+            }
+            
             // Reflect class.
-            $this->_methods[] = Zend_Server_Reflection::reflectClass($class, $argv, $namespace);
+            $this->_robots[] = Zend_Server_Reflection::reflectClass($class, $argv, $namespace);
             
         } else {
             

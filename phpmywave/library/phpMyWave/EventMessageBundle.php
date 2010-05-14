@@ -2,7 +2,7 @@
 /**
  * EventMessageBundle class
  */
-class phpMyWave_DataDocuments_EventMessageBundle
+class phpMyWave_EventMessageBundle
 {
 
     /**
@@ -46,6 +46,7 @@ class phpMyWave_DataDocuments_EventMessageBundle
     {
         $bundle = new phpMyWave_EventMessageBundle();
         //TODO Parse JSON data in new object
+        return $bundle;
     }
 
     /**

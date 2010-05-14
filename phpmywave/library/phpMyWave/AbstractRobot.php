@@ -1,10 +1,6 @@
 <?php
-/**
- * Abstract Robot class
- */
-abstract class phpMyWave_Robot
+abstract class phpMyWave_AbstractRobot
 {
-
     /**
      * Creates a new wave with a list of participants on it
      *
@@ -73,7 +69,15 @@ abstract class phpMyWave_Robot
     /**
      * Processes the incoming event bundle
      */
-    protected function processEvents(EventMessageBundle $_events) {}
+    public function processEvents(phpMyWave_EventMessageBundle $_events) {
+        
+        $reflection = Zend_Server_Reflection::reflectClass($this);
+        
+        foreach ($reflection->getMethods() as $method) {
+            
+            var_dump($method->getName());
+        }
+    }
 
     /**
      * Sets whether or not unsigned incoming requests from robot proxy are allowed
@@ -135,5 +139,4 @@ abstract class phpMyWave_Robot
 
     // WaveletTitleChangedEvent
     protected function onWaveletTitleChanged($_event)  {}
-
 }
