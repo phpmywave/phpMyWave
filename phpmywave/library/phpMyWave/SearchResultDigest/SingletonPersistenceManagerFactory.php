@@ -1,0 +1,4 @@
+<?php
+class phpMyWave_SearchResultDigest_SingletonPersistenceManagerFactory
+{
+}

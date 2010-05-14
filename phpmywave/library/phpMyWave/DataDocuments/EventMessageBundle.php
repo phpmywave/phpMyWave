@@ -2,7 +2,7 @@
 /**
  * EventMessageBundle class
  */
-class phpMyWave_EventMessageBundle
+class phpMyWave_DataDocuments_EventMessageBundle
 {
 
     /**
