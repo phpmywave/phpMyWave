@@ -1,8 +1,8 @@
 <?php
 class Robot extends phpMyWave_AbstractRobot
 {
-    public function onDocumentChanged()
+    public function onDocumentChanged($eventMessageBundle)
     {
-        echo 'document changed';
+        $eventMessageBundle->reply('Ohne API sag\' ich nichts!!!');
     }
 }

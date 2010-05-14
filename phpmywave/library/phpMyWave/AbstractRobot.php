@@ -74,7 +74,7 @@ abstract class phpMyWave_AbstractRobot
         
         foreach ($eventMessageBundle->getEvents() as $event) {
             
-            call_user_func(array($this, phpMyWave_Enum_EventType::$methodMapping[$event->getType()]), $eventMessageBundle);
+            call_user_func(array($this, phpMyWave_Enum_EventType::$methodMapping[$event->getType()]), $event);
         }
     }
 

@@ -67,7 +67,9 @@ class phpMyWave_EventMessageBundle
                     
                     // Define event properties.
                     $eventNamespace  = phpMyWave_Enum_EventType::$namespaceMapping[$eventType];
-                    $eventWavelet    = null; //@todo: missing!
+                    $eventWavelet    = (object) array( 'waveId'    => $_jsonData['wavelet']['waveId']
+                                                     , 'waveletId' => $_jsonData['wavelet']['waveletId']
+                                                     );
                     $eventBundle     = $eventMessageBundle;
                     $eventModifiedBy = (isset($eventJSON['modifiedBy']))                  ? (string) $eventJSON['modifiedBy']                  : null;
                     $eventTimestamp  = (isset($eventJSON['timestamp']))                   ? (int)    $eventJSON['timestamp']                   : null;
@@ -87,10 +89,9 @@ class phpMyWave_EventMessageBundle
             $eventMessageBundle->setEvents($events);
         }
         
-        //TODO Parse JSON data in new object
         return $eventMessageBundle;
     }
-
+    
     /**
      * Add a blip to the blipdata
      *

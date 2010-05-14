@@ -125,4 +125,52 @@ abstract class phpMyWave_Event_Abstract
     {
         return $this->_wavelet;
     }
+    
+    /**
+     * @todo: Refactor -> Quick'n'dirty!!!
+     */
+    public function reply($message)
+    {
+        echo '[{
+  "params": {
+    "capabilitiesHash": "affde4b96ce40f6"
+  },
+  "id": "0",
+  "method": "robot.notifyCapabilitiesHash"
+},
+{
+  "params": {
+    "waveletId": "' . $this->getWavelet()->waveletId . '",
+    "waveId": "' . $this->getWavelet()->waveId . '",
+    "waveletTitle": "BOT: Reply"
+  },
+  "id": "op1",
+  "method": "wavelet.setTitle"
+},
+{
+  "params": {
+    "blipId": "b+ja8F_Hw4h",
+    "waveletId": "' . $this->getWavelet()->waveletId . '",
+    "waveId": "' . $this->getWavelet()->waveId . '",
+    "blipData": {
+      "blipId": "TBD_google.com!conv+root_1",
+      "waveletId": "' . $this->getWavelet()->waveletId . '",
+      "waveId": "' . $this->getWavelet()->waveId . '"
+    }
+  },
+  "id": "op2",
+  "method": "blip.createChild"
+},
+{
+  "params": {
+    "blipId": "TBD_google.com!conv+root_1",
+    "how": 0,
+    "waveId": "' . $this->getWavelet()->waveId . '",
+    "text": "' . trim($message) . '",
+    "waveletId": "' . $this->getWavelet()->waveletId . '"
+  },
+  "id": "op3",
+  "method": "document.modify"
+}]';
+    }
 }
