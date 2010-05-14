@@ -1,5 +1,5 @@
 <?php
-class Robot
+class Robot extends phpMyWave_AbstractRobot
 {
     public function test1()
     {
