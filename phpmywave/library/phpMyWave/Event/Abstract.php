@@ -4,63 +4,80 @@
  */
 abstract class phpMyWave_Event_Abstract
 {
-
     /**
-     * @var phpMyWave_Blip
+     * The message bundle this event belongs to.
+     * 
+     * @var string
      */
-    private $_blip;
+    private $_blipId;
 
     /**
+     * The message bundle this event belongs to.
+     * 
      * @var phpMyWave_EventMessageBundle
      */
     private $_bundle;
 
     /**
+     * The ID of the participant that triggered this event.
+     * 
      * @var string
      */
-    private $_modifierId;
+    private $_modifiedBy;
 
     /**
-     * @var long
+     * The timestamp of this event.
+     * 
+     * @var int
      */
     private $_timestamp;
 
     /**
-     * @var phpMyWave_EventType
+     * The type of the event.
+     * 
+     * @var string
      */
     private $_eventType;
 
     /**
+     * The wavelet in which this event occurs.
+     * 
      * @var phpMyWave_Wavelet
      */
     protected $_wavelet;
 
     /**
+     * Constructor.
      *
-     * @param phpMyWave_EventType $_eventType
-     * @param phpMyWave_Wavelet $_wavelet
-     * @param phpMyWave_EventMessageBundle $_bundle
-     * @param string $_modifiedBy
-     * @param long $_timestamp
-     * @param string $_blipId
+     * @param  string                        $_eventType
+     * @param  phpMyWave_Wavelet             $_wavelet
+     * @param  phpMyWave_EventMessageBundle  $_bundle
+     * @param  string                        $_modifiedBy
+     * @param  int                           $_timestamp
+     * @param  string                        $_blipId
      */
     public function __construct($_eventType, $_wavelet, $_bundle, $_modifiedBy, $_timestamp, $_blipId)
     {
+        $this->_eventType  = $_eventType;
+        $this->_wavelet    = $_wavelet;
+        $this->_bundle     = $_bundle;
+        $this->_modifiedBy = $_modifiedBy;
+        $this->_timestamp  = $_timestamp;
+        $this->_blipId     = $_blipId;
     }
 
     /**
-     * Returns the blip in which this event occurs, or the root blip for a
-     * wavelet event
+     * Returns the blip in which this event occurs, or the root blip for a wavelet event.
      *
      * @return phpMyWave_Blip
      */
     public function getBlip()
     {
-        return $this->_blip;
+        return $this->_blipId;
     }
 
     /**
-     * Returns the message bundle which this event belongs to
+     * Returns the message bundle which this event belongs to.
      *
      * @return phpMyWave_EventMessageBundle
      */
@@ -70,37 +87,37 @@ abstract class phpMyWave_Event_Abstract
     }
 
     /**
-     * Returns the id of the participant that triggered this event
+     * Returns the id of the participant that triggered this event.
      *
      * @return string
      */
     public function getModifiedBy()
     {
-        return $this->_modifierId;
+        return $this->_modifiedBy;
     }
 
     /**
-     * Returns the timestamp when this event occurred on the server
+     * Returns the timestamp when this event occurred on the server.
      *
      * @return long
      */
     public function getTimestamp()
     {
-        $this->_timestamp;
+        return $this->_timestamp;
     }
 
     /**
-     * Returns the type of the event
+     * Returns the type of the event.
      *
      * @return phpMyWave_EventType
      */
     public function getType()
     {
-        $this->_eventType;
+        return $this->_eventType;
     }
 
     /**
-     * Returns the wavelet in which this event occurs
+     * Returns the wavelet in which this event occurs.
      *
      * @return phpMyWave_Wavelet
      */
@@ -108,5 +125,4 @@ abstract class phpMyWave_Event_Abstract
     {
         return $this->_wavelet;
     }
-
 }
