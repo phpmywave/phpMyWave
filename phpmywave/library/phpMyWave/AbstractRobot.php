@@ -40,7 +40,10 @@ abstract class phpMyWave_AbstractRobot
     /**
      * @return string
      */
-    protected function getRobotName() {}
+    protected function getRobotName() {
+        
+        return get_class($this);
+    }
 
     /**
      * @return string
@@ -62,21 +65,17 @@ abstract class phpMyWave_AbstractRobot
      */
     protected function computeCapabilityMap() {}
 
-    protected function doGet($_request, $_response) {}
-
-    protected function doPost($_request, $_response) {}
-
     /**
-     * Processes the incoming event bundle
+     * Processes the incoming event bundle.
+     * 
+     * @param phpMyWave_EventMessageBundle $eventMessageBundle
      */
-    public function processEvents(phpMyWave_EventMessageBundle $_events) {
-        /*
-        $reflection = Zend_Server_Reflection::reflectClass($this);
+    public function processEvents(phpMyWave_EventMessageBundle $eventMessageBundle) {
         
-        foreach ($reflection->getMethods() as $method) {
+        foreach ($eventMessageBundle->getEvents() as $event) {
             
-            var_dump($method->getName());
-        }*/
+            call_user_func(array($this, phpMyWave_Enum_EventType::$methodMapping[$event->getType()]), $eventMessageBundle);
+        }
     }
 
     /**

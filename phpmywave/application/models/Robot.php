@@ -1,13 +1,8 @@
 <?php
 class Robot extends phpMyWave_AbstractRobot
 {
-    public function test1()
+    public function onDocumentChanged()
     {
-    
-    }
-    
-    public function test2()
-    {
-    
+        echo 'document changed';
     }
 }
