@@ -84,3 +84,5 @@ class phpMyWave_Annotation
     public function __toString($position, $shiftAmount) {
 
     }
+
+}
