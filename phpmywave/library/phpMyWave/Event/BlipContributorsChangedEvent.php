@@ -18,31 +18,6 @@ class phpMyWave_Event_BlipContributorsChangedEvent extends phpMyWave_Event_Abstr
     private $_contributorsRemoved;
 
     /**
-     * Constructor
-     *
-     * @param $_wavelet
-     * @param $_bundle
-     * @param $_modifiedBy
-     * @param $_timestamp
-     * @param $_blipId
-     * @param $_contributorsAdded
-     * @param $_contributorsRemoved
-     */
-    public function phpMyWave_Event_BlipContributorsChangedEvent(
-        phpMyWave_Wavelet $_wavelet,
-        phpMyWave_EventMessageBundle $_bundle,
-        $_modifiedBy,
-        $_timestamp,
-        $_blipId,
-        $_contributorsAdded,
-        $_contributorsRemoved)
-    {
-        $this->_contributorsAdded = $_contributorsAdded;
-        $this->_contributorsRemoved = $_contributorsRemoved;
-        parent::__construct(self::$_eventType, $_bundle, $_modifiedBy, $_timestamp, $_blipId);
-    }
-
-    /**
      * Returns a list of the new contributors
      *
      * @return array the added contributors

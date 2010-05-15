@@ -13,27 +13,6 @@ class phpMyWave_Event_WaveletTitleChangedEvent extends phpMyWave_Event_Abstract
     private $_title;
 
     /**
-     * Constructor
-     *
-     * @param $_wavelet
-     * @param $_bundle
-     * @param $_modifiedBy
-     * @param $_timestamp
-     * @param $_blipId
-     * @param $_title
-     */
-    public function phpMyWave_Event_WaveletSelfAddedEvent(
-        phpMyWave_Wavelet $_wavelet,
-        phpMyWave_EventMessageBundle $_bundle,
-        $_modifiedBy,
-        $_timestamp,
-        $_blipId,
-        $_title)
-    {
-        parent::__construct(self::$_eventType, $_wavelet, $_bundle, $_modifiedBy, $_timestamp, $_blipId);
-    }
-
-    /**
      * Helper method for type conversion
      *
      * @param phpMyWave_Event_Abstract $_event

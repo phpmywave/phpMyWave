@@ -13,28 +13,6 @@ class phpMyWave_Event_FormButtonClickedEvent extends phpMyWave_Event_Abstract
     private $_buttonName;
 
     /**
-     * Constructor
-     *
-     * @param $_wavelet
-     * @param $_bundle
-     * @param $_modifiedBy
-     * @param $_timestamp
-     * @param $_blipId
-     * @param $_buttonName
-     */
-    public function phpMyWave_Event_FormButtonClickedEvent(
-        phpMyWave_Wavelet $_wavelet,
-        phpMyWave_EventMessageBundle $_bundle,
-        $_modifiedBy,
-        $_timestamp,
-        $_blipId,
-        $_buttonName)
-    {
-        $this->_buttonName = $_buttonName;
-        parent::__construct(self::$_eventType, $_wavelet, $_bundle, $_modifiedBy, $_timestamp, $_blipId);
-    }
-
-    /**
      * Returns the name of the button that was clicked
      *
      * @return string the name of the button that was clicked

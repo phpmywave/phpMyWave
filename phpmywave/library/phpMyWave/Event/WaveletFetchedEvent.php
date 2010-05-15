@@ -23,34 +23,6 @@ class phpMyWave_Event_WaveletFetchedEvent extends phpMyWave_Event_Abstract
     private $_blips;
 
     /**
-     * Constructor
-     *
-     * @param $_wavelet
-     * @param $_bundle
-     * @param $_modifiedBy
-     * @param $_timestamp
-     * @param $_rootBlipId
-     * @param $_message
-     * @param $_waveletData
-     * @param $_blips
-     */
-    public function phpMyWave_Event_WaveletFetchedEvent(
-        phpMyWave_Wavelet $_wavelet,
-        phpMyWave_EventMessageBundle $_bundle,
-        $_modifiedBy,
-        $_timestamp,
-        $_rootBlipId,
-        $_message,
-        phpMyWave_WaveletData $_waveletData,
-        $_blips)
-    {
-        $this->_message = $_message;
-        $this->_waveletData = $_waveletData;
-        $this->_blips = $_blips;
-        parent::__construct(self::$_eventType, $_bundle, $_modifiedBy, $_timestamp, $_rootBlipId);
-    }
-
-    /**
      * Returns the message that was passed into the wavelet fetch operation
      *
      * @return string the message that was passed into the wavelet fetch operation
