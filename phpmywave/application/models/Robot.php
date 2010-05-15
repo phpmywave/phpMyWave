@@ -13,16 +13,28 @@ class Robot extends phpMyWave_AbstractRobot
     public function postOnTwitter($textMessage, $replyTo = 0) {
 
         // Parameterprüfung
-        if(!is_string($textMessage) || !is_int($replyTo)){
+        if (!is_string($textMessage) || !is_int($replyTo)) {
             throw new phpMyWave_Exception_Twitter_Usage('Malformed Parameters for Robot::postOnTwitter()!');
         }
+        if (strlen($textMessage) > 140) {
+            throw new phpMyWave_Exception_Twitter_Usage('Status Text too long!');
+        }
 
-        var_dump("And the connection iiiiiiiiis: " . $this->twitterService->accountVerifyCredentials());
+        // Testverbindung
+        if ($this->twitterService->accountVerifyCredentials()
+                                 ->isError()
+        ) {
+            throw new phpMyWave_Exception_Twitter_Connection('Something has gone wrong with your twitter connection!');
+        }
+        if((int) $replyTo > 0) {
+            $this->twitterService->statusUpdate($textMessage, $replyTo);
+        } else {
+            $this->twitterService->statusUpdate($textMessage);
+        }
     }
 
     public function onDocumentChanged($eventMessageBundle)
     {
-        $this->postOnTwitter('asdf');
         $eventMessageBundle->reply('Ohne API sag\' ich nichts!!!');
     }
 }
