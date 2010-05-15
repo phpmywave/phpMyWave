@@ -10,9 +10,16 @@ class Robot extends phpMyWave_AbstractRobot
         // Saving Twitter Service to ClassVar for further work
         $this->twitterService   = new Zend_Service_Twitter($accessData['login'],$accessData['password']);
     }
+
+    /**
+     * Function postOnTwitter: Updates the Bots twitter status
+     * @param   string    $textMessage    with Twitter Status Update (length <= 140)
+     * @param   integer   $replyTo        Message ID to reply to
+     * @return  void
+     */
     public function postOnTwitter($textMessage, $replyTo = 0) {
 
-        // Parameterprüfung
+        // Parameter checkup
         if (!is_string($textMessage) || !is_int($replyTo)) {
             throw new phpMyWave_Exception_Twitter_Usage('Malformed Parameters for Robot::postOnTwitter()!');
         }
@@ -20,12 +27,14 @@ class Robot extends phpMyWave_AbstractRobot
             throw new phpMyWave_Exception_Twitter_Usage('Status Text too long!');
         }
 
-        // Testverbindung
+        // Connection checkup
         if ($this->twitterService->accountVerifyCredentials()
                                  ->isError()
         ) {
             throw new phpMyWave_Exception_Twitter_Connection('Something has gone wrong with your twitter connection!');
         }
+
+        // Actual status update
         if((int) $replyTo > 0) {
             $this->twitterService->statusUpdate($textMessage, $replyTo);
         } else {
