@@ -19,3 +19,6 @@ $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->registerNamespace('phpMyWave_');
 $autoloader->setFallbackAutoloader(true);
 $autoloader->suppressNotFoundWarnings(false);
+
+Zend_Registry::set('ROBOT_TWITTER_ACCESSDATA', array('login'        => 'phpMyWave',
+                                                     'password'     => 'BarCamp09!'));
